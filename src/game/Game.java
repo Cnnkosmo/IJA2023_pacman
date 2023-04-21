@@ -1,5 +1,7 @@
+package game;
+
 import javax.swing.*;
-import java.awt.Canvas
+import java.awt.Canvas;
 
 public class Game extends Canvas implements  Runnable{
 
