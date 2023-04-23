@@ -6,8 +6,10 @@ public interface Maze
 //    int dotseaten;
 
     void resetMaze();
-    Tile getTile();
+    Tile getTile(int row, int col);
     Tile nextTile();
+    int numRows();
+    int numCols();
     void dotEaten();
     void paint();
     void checkEndGame();
