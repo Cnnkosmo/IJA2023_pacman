@@ -19,4 +19,14 @@ public class Wall implements Tile {
     public void setDot() {
 
     }
+
+    @Override
+    public void setStartPac(boolean bool) {
+
+    }
+
+    @Override
+    public void setStartGhost(boolean bool) {
+
+    }
 }

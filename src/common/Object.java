@@ -1,9 +1,8 @@
 package common;
 
-public interface Object {
-   int getLocation();
-
-   boolean moveValid();
-   Tile getCurrentPosition();
-
+public interface Object
+{
+   int getCurrentX();
+   int getCurrentY();
+   void move(int dir);
 }

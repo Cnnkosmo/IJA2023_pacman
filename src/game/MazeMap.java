@@ -6,7 +6,7 @@ public class MazeMap implements Maze {
 
     private int rows;
     private int cols;
-    private Tile[][] map;
+    public Tile[][] map;
 
     private int lastRow = 0; //row counter
 
@@ -37,13 +37,13 @@ public class MazeMap implements Maze {
 //                        field.put(new FinishObject(field));
                         break;
                     case 'G':
-//                        field.put(new GhostObject(field));
+                        field.setStartGhost(true);
                         break;
                     case 'K':
 //                        field.put(new KeyObject(field));
                         break;
                     case 'S':
-//                        field.put(new PacmanObject(field));
+                        field.setStartPac(true);
                         break;
                     case '.':
                         break;

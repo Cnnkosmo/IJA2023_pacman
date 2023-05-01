@@ -5,23 +5,27 @@ import common.Tile;
 
 public class Ghost implements Object {
     int row = 0, col = 0;
+    int direction;
 
     public Ghost(int row, int col){
         this.row = row;
         this.col = col;
+        this.direction = 0;
     }
+
     @Override
-    public int getLocation() {
+    public int getCurrentX() {
         return 0;
     }
 
     @Override
-    public boolean moveValid() {
-        return false;
+    public int getCurrentY() {
+        return 0;
     }
 
     @Override
-    public Tile getCurrentPosition() {
-        return null;
+    public void move(int dir) {
+
     }
+
 }
