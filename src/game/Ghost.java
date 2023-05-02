@@ -27,7 +27,27 @@ public class Ghost implements Object {
 
     @Override
     public void move(Tile.Direction dir) {
-
+        // calculate new position based on current direction
+        int newRow = row;
+        int newCol = col;
+        switch (dir)
+        {
+            case D: //down
+                newRow++;
+                break;
+            case U: //up
+                newRow--;
+                break;
+            case L: //left
+                newCol--;
+                break;
+            case R: //right
+                newCol++;
+                break;
+        }
+        // update Pacman's position
+        row = newRow;
+        col = newCol;
     }
 
 }
