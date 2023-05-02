@@ -1,9 +1,41 @@
 package game;
 
+import common.Object;
 import common.Tile;
 
+import java.util.ArrayList;
+
 public class ViewBoard {
-    public void render(Pacman pacman, Ghost[] ghosts, MazeMap map)
+    Pacman pacman;
+    ArrayList<Ghost> ghosts;
+    MazeMap map;
+    public ViewBoard(Pacman pacman,  ArrayList<Ghost> ghosts, MazeMap map){
+        this.pacman = pacman;
+        this.ghosts = ghosts;
+        this.map = map;
+    }
+    public boolean samePosPac(Object obj, Tile tile){
+        if (tile.getRow() == obj.getCurrentRow() && tile.getColumn() == obj.getCurrentCol())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public boolean samePosGhost(ArrayList<Ghost> ghosts, Tile tile)
+    {
+        for (Ghost ghost : ghosts)
+        {
+            if (ghost.getCurrentRow() == tile.getRow() && ghost.getCurrentCol() == tile.getColumn())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void render(Pacman pacman, ArrayList<Ghost> ghosts, MazeMap map)
     {
         for (Tile[] row : map.map)
         {
@@ -11,13 +43,13 @@ public class ViewBoard {
             {
                 if (item instanceof Path)
                 {
-                    if (((Path) item).isStartGhost())
-                    {
-                        System.out.print("G" + " ");
-                    }
-                    else if (((Path) item).isStartPac())
+                    if (samePosPac(pacman,item))
                     {
                         System.out.print("S" + " ");
+                    }
+                    else if (samePosGhost(ghosts,item))
+                    {
+                        System.out.print("G" + " ");
                     }
                     else
                     {
