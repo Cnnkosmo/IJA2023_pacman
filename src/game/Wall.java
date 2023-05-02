@@ -10,6 +10,21 @@ public class Wall implements Tile {
         this.col = col;
 
     }
+
+    public boolean canGo(){
+        return false;
+    }
+
+    @Override
+    public int getColumn() {
+        return col;
+    }
+
+    @Override
+    public int getRow() {
+        return row;
+    }
+
     @Override
     public void setWall() {
 

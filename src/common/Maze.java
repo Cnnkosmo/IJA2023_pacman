@@ -7,7 +7,8 @@ public interface Maze
 
     void resetMaze();
     Tile getTile(int row, int col);
-    Tile nextTile();
+    Tile nextTile(Tile.Direction dir, int row, int col);
+
     int numRows();
     int numCols();
     void dotEaten();

@@ -7,7 +7,6 @@ public class MazeMap implements Maze {
     private int rows;
     private int cols;
     public Tile[][] map;
-
     private int lastRow = 0; //row counter
 
     public MazeMap(int rows, int cols) {
@@ -69,12 +68,23 @@ public class MazeMap implements Maze {
     public Tile getTile(int row, int col) {
         return this.map[row][col];
     }
-
     @Override
-    public Tile nextTile() {
-        return null;
+    public Tile nextTile(Tile.Direction dir, int row, int col)
+    {
+        switch (dir)
+        {
+            case U:
+                return getTile(row - 1,col);
+            case D:
+                return getTile(row + 1, col);
+            case L:
+                return getTile(row, col - 1);
+            case R:
+                return getTile(row, col + 1);
+            default:
+                return null;
+        }
     }
-
     @Override
     public int numRows() {
         return this.rows;

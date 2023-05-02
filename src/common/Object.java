@@ -2,7 +2,7 @@ package common;
 
 public interface Object
 {
-   int getCurrentX();
-   int getCurrentY();
-   void move(int dir);
+   int getCurrentRow();
+   int getCurrentCol();
+   void move(Tile.Direction dir);
 }

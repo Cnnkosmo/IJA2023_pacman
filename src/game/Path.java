@@ -16,25 +16,47 @@ public class Path implements Tile
         this.startGhost = startGhost;
     }
 
-    public boolean isStartPac() {
+    public boolean isStartPac()
+    {
         return startPac;
     }
 
-    public boolean isStartGhost() {
+    public boolean isStartGhost()
+    {
         return startGhost;
     }
 
-    public Path(int row, int col){
+    public Path(int row, int col)
+    {
         this.row = row;
         this.col = col;
     }
+
+    public boolean canGO()
+    {
+        return true;
+    }
+
+
     @Override
-    public void setWall() {
+    public int getColumn() {
+        return col;
+    }
+
+    @Override
+    public int getRow() {
+        return row;
+    }
+
+    @Override
+    public void setWall()
+    {
 
     }
 
     @Override
-    public void setDot() {
+    public void setDot()
+    {
 
     }
 }

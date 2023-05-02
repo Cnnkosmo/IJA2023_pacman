@@ -14,17 +14,17 @@ public class Ghost implements Object {
     }
 
     @Override
-    public int getCurrentX() {
+    public int getCurrentRow() {
         return 0;
     }
 
     @Override
-    public int getCurrentY() {
+    public int getCurrentCol() {
         return 0;
     }
 
     @Override
-    public void move(int dir) {
+    public void move(Tile.Direction dir) {
 
     }
 

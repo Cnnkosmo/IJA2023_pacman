@@ -1,56 +1,58 @@
 package game;
 
 import common.Object;
+import common.Tile;
 
 public class Pacman implements Object {
-    private int x, y;  // current position of Pacman
+    private int row, col;  // current position of Pacman
     private int direction;  // current direction of Pacman
 
-    public Pacman(int x, int y)
+    public Pacman(int row, int col)
     {
-        this.x = x;
-        this.y = y;
+        this.row = row;
+        this.col = col;
         this.direction = 0;  // default direction
     }
 
     @Override
     // move Pacman one step in its current direction
-    public void move(int dir) {
+    public void move(Tile.Direction dir) {
         // calculate new position based on current direction
-        int newX = x;
-        int newY = y;
-        switch (dir) {
-            case 0:
-                newY--;
+        int newRow = row;
+        int newCol = col;
+        switch (dir)
+        {
+            case D: //down
+                newCol--;
                 break;
-            case 1:
-                newY++;
+            case U: //up
+                newCol++;
                 break;
-            case 2:
-                newX--;
+            case L: //left
+                newRow--;
                 break;
-            case 3:
-                newX++;
+            case R: //right
+                newRow++;
                 break;
         }
-        // check if new position is valid (not a wall)
+//          check if new position is valid (not a wall)
 //        if (isWall(newX, newY)) {
 //            return;
 //        }
         // update Pacman's position
-        x = newX;
-        y = newY;
+        row = newRow;
+        col = newCol;
     }
 
     @Override
-    public int getCurrentX()
+    public int getCurrentRow()
     {
-        return x;
+        return row;
     }
 
     @Override
-    public int getCurrentY()
+    public int getCurrentCol()
     {
-        return y;
+        return col;
     }
 }

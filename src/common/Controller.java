@@ -1,5 +1,6 @@
 package common;
 
-public interface Controller {
-
+public interface Controller
+{
+    void update(Tile.Direction dir);
 }
