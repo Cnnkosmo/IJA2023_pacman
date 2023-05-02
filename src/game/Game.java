@@ -18,8 +18,9 @@ public class Game {
         PacmanController pacmanController = new PacmanController(pacman,map);
         ArrayList<GhostController> ghostControllers = setGhostControllers(ghosts,map);
         pacmanController.update(Tile.Direction.L);
+        ViewBoard view = new ViewBoard(pacman, ghosts, map);
+        view.render(pacman,ghosts,map);
     }
-
     public static Pacman createPacman(MazeMap map) {
 
         for (Tile[] row : map.map) {
@@ -33,7 +34,6 @@ public class Game {
         }
         return null;
     }
-
     public static ArrayList<Ghost> createGhosts(MazeMap map) {
         ArrayList<Ghost> ghosts = new ArrayList<Ghost>();
         for (Tile[] row : map.map) {
