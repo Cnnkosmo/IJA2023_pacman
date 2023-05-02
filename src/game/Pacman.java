@@ -35,10 +35,6 @@ public class Pacman implements Object {
                 newCol++;
                 break;
         }
-//          check if new position is valid (not a wall)
-//        if (isWall(newX, newY)) {
-//            return;
-//        }
         // update Pacman's position
         row = newRow;
         col = newCol;

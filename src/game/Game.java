@@ -8,18 +8,19 @@ public class Game {
     public static void main(String[] args) {
         Maze_cfg cfg = new Maze_cfg();
         cfg.startReading(3, 3);
-        cfg.processLine("X.S");
-        cfg.processLine(".GG");
-        cfg.processLine(".GG");
+        cfg.processLine("XGS");
+        cfg.processLine("X..");
+        cfg.processLine("XG.");
         cfg.stopReading();
         MazeMap map = cfg.createMaze();
         Pacman pacman = createPacman(map);
         ArrayList<Ghost> ghosts = createGhosts(map);
         PacmanController pacmanController = new PacmanController(pacman,map);
         ArrayList<GhostController> ghostControllers = setGhostControllers(ghosts,map);
-        pacmanController.update(Tile.Direction.L);
+//        pacmanController.update(Tile.Direction.L);
         ViewBoard view = new ViewBoard(pacman, ghosts, map);
         view.render(pacman,ghosts,map);
+//        System.out.println(view.samePosGhost(ghosts, map.getTile(2,3)));
     }
     public static Pacman createPacman(MazeMap map) {
 
