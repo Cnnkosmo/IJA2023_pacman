@@ -19,8 +19,11 @@ public class Game {
         ArrayList<Ghost> ghosts = createGhosts(map);
         PacmanController pacmanController = new PacmanController(pacman,map);
         ArrayList<GhostController> ghostControllers = setGhostControllers(ghosts,map);
-//        pacmanController.update(Tile.Direction.L);
+        pacmanController.update(Tile.Direction.D);
+        pacmanController.update(Tile.Direction.D);
         ViewBoard view = new ViewBoard(pacman, ghosts, map);
+        view.render(pacman,ghosts,map);
+        ghostControllers.get(0).update((Tile.Direction.R));
         view.render(pacman,ghosts,map);
 //        System.out.println(view.samePosGhost(ghosts, map.getTile(2,3)));
     }
