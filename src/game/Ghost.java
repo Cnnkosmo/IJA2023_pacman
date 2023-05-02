@@ -14,13 +14,15 @@ public class Ghost implements Object {
     }
 
     @Override
-    public int getCurrentRow() {
-        return 0;
+    public int getCurrentRow()
+    {
+        return row;
     }
 
     @Override
-    public int getCurrentCol() {
-        return 0;
+    public int getCurrentCol()
+    {
+        return col;
     }
 
     @Override
