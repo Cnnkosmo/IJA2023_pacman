@@ -23,16 +23,16 @@ public class Pacman implements Object {
         switch (dir)
         {
             case D: //down
-                newCol--;
+                newRow++;
                 break;
             case U: //up
-                newCol++;
-                break;
-            case L: //left
                 newRow--;
                 break;
+            case L: //left
+                newCol--;
+                break;
             case R: //right
-                newRow++;
+                newCol++;
                 break;
         }
 //          check if new position is valid (not a wall)
