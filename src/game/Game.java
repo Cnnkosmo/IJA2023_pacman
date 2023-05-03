@@ -9,23 +9,22 @@ import java.util.ArrayList;
 public class Game {
     public static void main(String[] args) {
         Maze_cfg cfg = new Maze_cfg();
-        cfg.startReading(3, 3);
-        cfg.processLine("XGS");
-        cfg.processLine("X..");
-        cfg.processLine("XG.");
+        //cfg.startReading(3,3);
+        cfg.startReading(cfg.getRowsOrCols(0), cfg.getRowsOrCols(1));
+        cfg.getMapFromTxt();
         cfg.stopReading();
-        MazeMap map = cfg.createMaze();
-        Pacman pacman = createPacman(map);
-        ArrayList<Ghost> ghosts = createGhosts(map);
-        PacmanController pacmanController = new PacmanController(pacman,map);
-        ArrayList<GhostController> ghostControllers = setGhostControllers(ghosts,map);
-        pacmanController.update(Tile.Direction.D);
-        pacmanController.update(Tile.Direction.D);
-        ViewBoard view = new ViewBoard(pacman, ghosts, map);
-        view.render(pacman,ghosts,map);
-        ghostControllers.get(0).update((Tile.Direction.R));
-        view.render(pacman,ghosts,map);
-//        System.out.println(view.samePosGhost(ghosts, map.getTile(2,3)));
+        //MazeMap map = cfg.createMaze();
+        //Pacman pacman = createPacman(map);
+        //ArrayList<Ghost> ghosts = createGhosts(map);
+        //PacmanController pacmanController = new PacmanController(pacman,map);
+        //ArrayList<GhostController> ghostControllers = setGhostControllers(ghosts,map);
+        //pacmanController.update(Tile.Direction.D);
+        //pacmanController.update(Tile.Direction.D);
+        //ViewBoard view = new ViewBoard(pacman, ghosts, map);
+        //view.render(pacman,ghosts,map);
+        //ghostControllers.get(0).update((Tile.Direction.R));
+        //view.render(pacman,ghosts,map);
+        //System.out.println(view.samePosGhost(ghosts, map.getTile(2,3)));
     }
     /*
     *@brief return created pacman with the row and col values setted for same values as the tile with it start position
