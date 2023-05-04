@@ -37,7 +37,7 @@ public class Maze_cfg {
         }
         int number = 0;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("../IJA2023_pacman-main/maps/map_1.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("../pacman/maps/map_1.txt"));
             String firstLine = reader.readLine();
             String[] numbers = firstLine.split("\\s+");;
             number = Integer.parseInt(numbers[what]);
@@ -51,12 +51,10 @@ public class Maze_cfg {
     }
     public void getMapFromTxt(){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("../IJA2023_pacman-main/maps/map_1.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("../pacman/maps/map_1.txt"));
             String line = reader.readLine();
             while ((line = reader.readLine()) != null) { // read each subsequent line
-                //901
-                // System.out.println(line);
-                processLine(line);
+                 processLine(line);
             }
         } catch(IOException e){
             e.printStackTrace();
