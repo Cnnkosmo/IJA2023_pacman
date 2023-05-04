@@ -9,10 +9,17 @@ import java.util.ArrayList;
 public class Game {
     public static void main(String[] args) {
         Maze_cfg cfg = new Maze_cfg();
-        cfg.startReading(3, 3);
-        cfg.processLine("XGS");
-        cfg.processLine("X..");
-        cfg.processLine("XG.");
+        cfg.startReading(10, 10);
+        cfg.processLine(".........S");
+        cfg.processLine(".....G...G");
+        cfg.processLine("..........");
+        cfg.processLine("..........");
+        cfg.processLine("..........");
+        cfg.processLine("..........");
+        cfg.processLine("..........");
+        cfg.processLine("..........");
+        cfg.processLine("..........");
+        cfg.processLine("..........");
         cfg.stopReading();
         MazeMap map = cfg.createMaze();
         Pacman pacman = createPacman(map);
