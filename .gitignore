@@ -26,7 +26,7 @@ bin/
 .vscode/
 
 .idea/
-
+target/
 pacman.iml
 
 ### Mac OS ###
