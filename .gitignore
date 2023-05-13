@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -11,6 +12,12 @@ target/
 *.iws
 *.iml
 *.ipr
+=======
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+>>>>>>> e58c390c30eddb1cb65da1568896126def6f518a
 
 ### Eclipse ###
 .apt_generated
@@ -20,6 +27,12 @@ target/
 .settings
 .springBeans
 .sts4-cache
+<<<<<<< HEAD
+=======
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+>>>>>>> e58c390c30eddb1cb65da1568896126def6f518a
 
 ### NetBeans ###
 /nbproject/private/
@@ -27,6 +40,7 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
+<<<<<<< HEAD
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
@@ -36,3 +50,15 @@ build/
 .idea/
 ### Mac OS ###
 .DS_Store
+=======
+
+### VS Code ###
+.vscode/
+
+.idea/
+target/
+pacman.iml
+
+### Mac OS ###
+.DS_Store.idea/
+>>>>>>> e58c390c30eddb1cb65da1568896126def6f518a
