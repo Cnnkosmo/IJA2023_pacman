@@ -7,6 +7,8 @@ public class Path implements Tile
     int row = 0, col = 0;
     boolean startPac = false;
     boolean startGhost = false;
+    boolean isFinish = false;
+    boolean keyObject = false;
 
     public void setStartPac(boolean startPac) {
         this.startPac = startPac;
@@ -32,6 +34,22 @@ public class Path implements Tile
         this.col = col;
     }
 
+    public void setFinish(boolean finish) {
+        isFinish = finish;
+    }
+
+    public void setKeyObject(boolean keyObject) {
+        this.keyObject = keyObject;
+    }
+
+    public boolean isFinish() {
+        return isFinish;
+    }
+
+    public boolean isKeyObject() {
+        return keyObject;
+    }
+
     public boolean canGO()
     {
         return true;
@@ -46,17 +64,5 @@ public class Path implements Tile
     @Override
     public int getRow() {
         return row;
-    }
-
-    @Override
-    public void setWall()
-    {
-
-    }
-
-    @Override
-    public void setDot()
-    {
-
     }
 }

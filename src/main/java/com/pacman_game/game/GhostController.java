@@ -12,15 +12,16 @@ public class GhostController implements Controller {
         this.ghost = ghost;
         this.maze = maze;
     }
-    public void update(Tile.Direction dir)
+    public boolean update(Tile.Direction dir)
     {
         Tile nextField = maze.nextTile(dir,ghost.getCurrentRow(),ghost.getCurrentCol());
         if (nextField instanceof Wall){
-            throw new UnsupportedOperationException();
+            System.out.println("ghost hit the wall");
         }
         else
         {
             ghost.move(dir);
         }
+        return false;
     }
 }

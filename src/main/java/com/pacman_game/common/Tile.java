@@ -15,8 +15,10 @@ public interface Tile {
     }
     int getColumn();
     int getRow();
-    void setWall();
-    void setDot();
     void setStartPac(boolean bool);
     void setStartGhost(boolean bool);
+    void setFinish(boolean finish);
+    void setKeyObject(boolean keyObject);
+    boolean isFinish();
+    boolean isKeyObject();
 }

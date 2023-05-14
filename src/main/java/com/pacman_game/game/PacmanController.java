@@ -11,15 +11,28 @@ public class PacmanController implements Controller {
         this.pacman = pacman;
         this.maze = maze;
     }
-    public void update(Tile.Direction dir)
+    public boolean update(Tile.Direction dir)
     {
         Tile nextField = maze.nextTile(dir,pacman.getCurrentRow(),pacman.getCurrentCol());
-        if (nextField instanceof Wall){
-            throw new UnsupportedOperationException();
+        if (nextField instanceof Wall)
+        {
+            System.out.println("hitted the wall");
         }
         else
         {
+            if (nextField.isKeyObject())
+            {
+                System.out.println("hit the dot");
+                maze.dotEaten(nextField.getRow(), nextField.getColumn());
+            }
+            else if (nextField.isFinish())
+            {
+                System.out.println("finished the game");
+                pacman.move(dir);
+                return true;
+            }
             pacman.move(dir);
         }
+        return false;
     }
 }

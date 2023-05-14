@@ -11,7 +11,7 @@ public interface Maze
 
     int numRows();
     int numCols();
-    void dotEaten();
+    void dotEaten(int row, int col);
     void paint();
     void checkEndGame();
     boolean withinMaze();

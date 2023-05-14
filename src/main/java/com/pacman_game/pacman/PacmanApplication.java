@@ -1,16 +1,18 @@
 package com.pacman_game.pacman;
 
+import com.pacman_game.game.*;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class PacmanApplication extends Application {
     @Override
@@ -20,50 +22,36 @@ public class PacmanApplication extends Application {
         PacmanAppController controller = fxmlLoader.getController();
         Scene scene = new Scene(root);
 
-        TilePane grid = new TilePane();
-
-        for (int row = 0; row < 10; row++) {
-            for (int col = 0; col < 10; col++) {
-                // Create a new cell and set its properties
-                StackPane cell = new StackPane();
-                cell.setPrefSize(50, 50); // Set the size of the cell
-                cell.setStyle("-fx-background-color: black;"); // Set the background color of the cell
-
-                // Add the cell to the grid
-                grid.getChildren().add(cell);
-            }
-        }
-
-
-
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
             @Override
             public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode())
-                {
-                    case UP:
+                switch (keyEvent.getCode()){
+                    case W:
                         controller.moveUp();
                         break;
-                    case DOWN:
+
+                    case S:
                         controller.moveDown();
                         break;
-                    case RIGHT:
-                        controller.moveRight();
-                        break;
-                    case LEFT:
+
+                    case A:
                         controller.moveLeft();
                         break;
-                    default:
+
+                    case D:
+                        controller.moveRight();
                         break;
                 }
             }
         });
+
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
+    public static void main(String[] args)
+    {
+
+        launch(args);
     }
 }

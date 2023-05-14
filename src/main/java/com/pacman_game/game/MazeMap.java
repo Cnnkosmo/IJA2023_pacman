@@ -33,13 +33,13 @@ public class MazeMap implements Maze {
                 field = new Path(this.lastRow, col);
                 switch (ch) {
                     case 'T':
-//                        field.put(new FinishObject(field));
+                        field.setFinish(true);
                         break;
                     case 'G':
                         field.setStartGhost(true);
                         break;
                     case 'K':
-//                        field.put(new KeyObject(field));
+                        field.setKeyObject(true);
                         break;
                     case 'S':
                         field.setStartPac(true);
@@ -96,8 +96,9 @@ public class MazeMap implements Maze {
     }
 
     @Override
-    public void dotEaten() {
-
+    public void dotEaten(int row, int col)
+    {
+        map[row][col].setKeyObject(false);
     }
 
     @Override

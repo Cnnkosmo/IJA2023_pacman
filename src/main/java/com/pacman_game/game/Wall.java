@@ -24,24 +24,26 @@ public class Wall implements Tile {
     public int getRow() {
         return row;
     }
+    @Override
+    public void setStartPac(boolean bool) { }
+    @Override
+    public void setStartGhost(boolean bool){ }
 
     @Override
-    public void setWall() {
+    public void setFinish(boolean finish) { }
 
+    @Override
+    public void setKeyObject(boolean keyObject) { }
+
+    @Override
+    public boolean isFinish()
+    {
+        return false;
     }
 
     @Override
-    public void setDot() {
-
-    }
-
-    @Override
-    public void setStartPac(boolean bool) {
-
-    }
-
-    @Override
-    public void setStartGhost(boolean bool) {
-
+    public boolean isKeyObject()
+    {
+        return false;
     }
 }
