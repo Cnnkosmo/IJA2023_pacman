@@ -1,18 +1,25 @@
 package com.pacman_game.game;
-
+import java.io.FileWriter;
 import com.pacman_game.common.Object;
 import com.pacman_game.common.Tile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ViewBoard {
     Pacman pacman;
     ArrayList<Ghost> ghosts;
     MazeMap map;
+    FileWriter writer;
     public ViewBoard(Pacman pacman,  ArrayList<Ghost> ghosts, MazeMap map){
         this.pacman = pacman;
         this.ghosts = ghosts;
         this.map = map;
+        try {
+            writer = new FileWriter("log.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public boolean samePosPac(Object obj, Tile tile){
         if (tile.getRow() == obj.getCurrentRow() && tile.getColumn() == obj.getCurrentCol())
@@ -45,25 +52,61 @@ public class ViewBoard {
                 {
                     if (samePosPac(pacman,item))
                     {
-                        System.out.print("S" + " ");
+                        try {
+                            writer.write("S" + " ");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                     else if (samePosGhost(ghosts,item))
                     {
-                        System.out.print("G" + " ");
+                        try {
+                            writer.write("G" + " ");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    else if (((Path) item).keyObject)
+                    {
+                        try {
+                            writer.write("K" + " ");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                     else
                     {
-                        System.out.print("." + " ");
+                        try {
+                            writer.write("." + " ");
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
                 else if (item instanceof Wall)
                 {
-                    System.out.print("X" + " ");
+                    try {
+                        writer.write("X" + " ");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
-            System.out.println('\n');
+            try {
+                writer.write('\n');
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        System.out.println("COLS "+ map.numCols());
-        System.out.println("ROWS "+ map.numRows());
+        try {
+            writer.write("COLS "+ map.numCols());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            writer.write("ROWS "+ map.numRows() + "\n");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

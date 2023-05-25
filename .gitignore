@@ -58,6 +58,7 @@ build/
 .idea/
 target/
 pacman.iml
+log.txt
 
 ### Mac OS ###
 .DS_Store.idea/

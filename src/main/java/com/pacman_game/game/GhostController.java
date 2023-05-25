@@ -16,7 +16,7 @@ public class GhostController implements Controller {
     {
         Tile nextField = maze.nextTile(dir,ghost.getCurrentRow(),ghost.getCurrentCol());
         if (nextField instanceof Wall){
-//            System.out.println("ghost hit the wall");
+
         }
         else
         {

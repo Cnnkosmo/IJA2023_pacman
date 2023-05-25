@@ -5,13 +5,13 @@ import com.pacman_game.common.Tile;
 
 public class Pacman implements Object {
     private int row, col;  // current position of Pacman
-    private int direction;  // current direction of Pacman
+    Tile.Direction direction;  // current direction of Pacman
 
     public Pacman(int row, int col)
     {
         this.row = row;
         this.col = col;
-        this.direction = 0;  // default direction
+        this.direction = Tile.Direction.R;  // default direction
     }
 
     @Override
@@ -24,15 +24,19 @@ public class Pacman implements Object {
         {
             case D: //down
                 newRow++;
+                direction =  dir;
                 break;
             case U: //up
                 newRow--;
+                direction = dir;
                 break;
             case L: //left
                 newCol--;
+                direction = dir;
                 break;
             case R: //right
                 newCol++;
+                direction = dir;
                 break;
         }
         // update Pacman's position

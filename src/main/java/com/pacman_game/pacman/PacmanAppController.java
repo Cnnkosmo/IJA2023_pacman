@@ -1,6 +1,8 @@
 package com.pacman_game.pacman;
 
-import java.io.FileInputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -16,9 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import com.pacman_game.game.*;
 import com.pacman_game.common.*;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Sphere;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -33,12 +32,8 @@ public class PacmanAppController implements Initializable {
     Pacman pacman;
     ArrayList<Ghost> ghosts;
     MazeMap map;
-    @FXML
-    Circle pacmanObj;
-
-    @FXML
-    Rectangle ghostObj;
-
+    File log;
+    ViewBoard view;
     public PacmanAppController() {
         Game game = new Game();
         this.map = game.getMap();
@@ -46,37 +41,40 @@ public class PacmanAppController implements Initializable {
         this.ghosts = game.createGhosts(game.getMap());
         this.pacmanController = new PacmanController(pacman, game.getMap());
         this.ghostControllers = game.setGhostControllers(ghosts, game.getMap());
+        this.view = new ViewBoard(pacman,ghosts,map);
+        log = new File("log.txt");
+        this.Create_File();
     }
 
+    public void Create_File()
+    {
+        try {
+            log.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void moveUp() {
         pacmanController.update(Tile.Direction.U);
         ghostControllers.get(0).update(Tile.Direction.R);
-//        System.out.println("rowpacman:" + pacman.getCurrentRow() + " colpacman: " + pacman.getCurrentCol());
-//        System.out.println("movin up");
         moveGhosts(ghostControllers);
         initialize(location, resources);
     }
 
     public void moveDown() {
         pacmanController.update(Tile.Direction.D);
-//        System.out.println("rowpacman:" + pacman.getCurrentRow() + " colpacman: " + pacman.getCurrentCol());
-//        System.out.println("movin down");
         moveGhosts(ghostControllers);
         initialize(location, resources);
     }
 
     public void moveLeft() {
         pacmanController.update(Tile.Direction.L);
-//        System.out.println("rowpacman:" + pacman.getCurrentRow() + " colpacman: " + pacman.getCurrentCol());
-//        System.out.println("movin left");
         moveGhosts(ghostControllers);
         initialize(location, resources);
     }
 
     public void moveRight() {
         pacmanController.update(Tile.Direction.R);
-//        System.out.println("rowpacman:" + pacman.getCurrentRow() + " colpacman: " + pacman.getCurrentCol());
-//        System.out.println("movin right");
         moveGhosts(ghostControllers);
         initialize(location, resources);
     }
@@ -86,7 +84,6 @@ public class PacmanAppController implements Initializable {
         int upperbound = 4;
         for (GhostController controller : ghostControllers) {
             int intRandom = rand.nextInt(upperbound);
-            System.out.println("Random" + intRandom);
             switch (intRandom) {
                 case 0:
                     controller.update(Tile.Direction.D);
@@ -117,6 +114,11 @@ public class PacmanAppController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (map.isEnd())
+        {
+            System.out.println("YOU'VE WIN :)");
+            exit();
+        }
         maze = new GridPane();
         pane.getChildren().clear();
         for (int i = 0; i < map.map.length - 2; i++) {
@@ -134,13 +136,8 @@ public class PacmanAppController implements Initializable {
                         view.setFitHeight(40);
                         view.setFitWidth(40);
                         maze.add(view, item.getColumn(), item.getRow());
+
                     } else if (item.isFinish()) {
-                        if (pacman.getCurrentCol() == item.getColumn() && pacman.getCurrentRow() ==  item.getRow())
-                        {
-                            System.out.println("FFFFFFFIIIIIIINNNNN");
-                            exit();
-                        }
-                        System.out.println(" paccol " + pacman.getCurrentCol() + " pacrow " + pacman.getCurrentRow() + "|| fincol " + item.getColumn() + " finrow " + item.getRow());
                         Image image = new Image("file:../pacman_game/data/key.png");
                         ImageView view = new ImageView(image);
                         view.setFitHeight(40);
@@ -171,9 +168,9 @@ public class PacmanAppController implements Initializable {
         }
         maze.gridLinesVisibleProperty().set(true);
         pane.getChildren().add(maze);
-//        maze.add(pacmanObj,pacman.getCurrentCol(),pacman.getCurrentRow());
         for (Ghost ghost : ghosts) {
             if (pacman.getCurrentCol() == ghost.getCurrentCol() && pacman.getCurrentRow() == ghost.getCurrentRow()) {
+                System.out.println("YOU'VE LOST :(");
                 exit();
             }
             Image image = new Image("file:../pacman_game/data/ghost.png");
@@ -184,6 +181,6 @@ public class PacmanAppController implements Initializable {
 
 
         }
-
+        view.render(pacman,ghosts,map);
     }
 }

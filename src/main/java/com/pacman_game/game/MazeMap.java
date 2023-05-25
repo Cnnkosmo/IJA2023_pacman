@@ -8,6 +8,7 @@ public class MazeMap implements Maze {
     public int cols;
     public Tile[][] map;
     private int lastRow = 0; //row counter
+    boolean end;
 
     public MazeMap(int rows, int cols) {
         this.rows = rows + 2;
@@ -59,6 +60,11 @@ public class MazeMap implements Maze {
         return true;
     }
 
+    public boolean isEnd()
+    {
+        return end;
+    }
+
     @Override
     public void resetMaze() {
 
@@ -108,7 +114,7 @@ public class MazeMap implements Maze {
 
     @Override
     public void checkEndGame() {
-
+        end = true;
     }
 
     @Override

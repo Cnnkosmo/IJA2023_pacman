@@ -16,19 +16,17 @@ public class PacmanController implements Controller {
         Tile nextField = maze.nextTile(dir,pacman.getCurrentRow(),pacman.getCurrentCol());
         if (nextField instanceof Wall)
         {
-//            System.out.println("hitted the wall");
         }
         else
         {
             if (nextField.isKeyObject())
             {
-//                System.out.println("hit the dot");
                 maze.dotEaten(nextField.getRow(), nextField.getColumn());
             }
             else if (nextField.isFinish())
             {
-//                System.out.println("finished the game");
                 pacman.move(dir);
+                maze.checkEndGame();
                 return true;
             }
             pacman.move(dir);

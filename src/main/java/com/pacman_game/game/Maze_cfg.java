@@ -51,7 +51,7 @@ public class Maze_cfg {
     }
     public void getMapFromTxt(){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("../pacman_game/maps/map_1.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("../pacman_game/maps/map_2.txt"));
             String line = reader.readLine();
             while ((line = reader.readLine()) != null) { // read each subsequent line
                  processLine(line);
