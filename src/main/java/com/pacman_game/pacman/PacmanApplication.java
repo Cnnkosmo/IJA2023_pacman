@@ -4,10 +4,9 @@ import com.pacman_game.game.*;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -17,34 +16,62 @@ import java.util.ArrayList;
 public class PacmanApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-        Parent root = fxmlLoader.load();
-        PacmanAppController controller = fxmlLoader.getController();
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(new AnchorPane());
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()){
-                    case W:
-                        controller.moveUp();
+                    case L:
+                        showGui(stage);
+                        break;
+                    case G:
+                        showGame(stage);
                         break;
 
-                    case S:
-                        controller.moveDown();
-                        break;
-
-                    case A:
-                        controller.moveLeft();
-                        break;
-
-                    case D:
-                        controller.moveRight();
-                        break;
                 }
             }
         });
 
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void showGui(Stage stage) {
+        LoadGUI load = new LoadGUI(this);
+        Scene scene = new Scene(load.getRoot());
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void showGame(Stage stage) {
+        GameScene gameScene = new GameScene(this);
+        Scene scene = new Scene(gameScene.rerender());
+        PacmanAppController appController = new PacmanAppController(gameScene);
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch (keyEvent.getCode())
+                {
+                    case W:
+                        appController.moveUp();
+                        System.out.println("W");
+                        break;
+                    case D:
+                        appController.moveRight();
+                        System.out.println("D");
+                        break;
+                    case S:
+                        appController.moveDown();
+                        System.out.println("S");
+                        break;
+                    case A:
+                        appController.moveLeft();
+                        System.out.println("A");
+                        break;
+                }
+
+            }
+        });
         stage.setScene(scene);
         stage.show();
     }
