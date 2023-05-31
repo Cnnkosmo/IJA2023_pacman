@@ -42,8 +42,18 @@ public class ViewBoard {
         }
         return false;
     }
-    public void render(Pacman pacman, ArrayList<Ghost> ghosts, MazeMap map)
+    public void render(Pacman pacman, ArrayList<Ghost> ghosts, MazeMap map, boolean writeRowCol)
     {
+        if (writeRowCol)
+        {
+            try {
+                writer.write(map.cols + " " + map.rows);
+                writer.write("\n");
+                System.out.print(("S"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         for (Tile[] row : map.map)
         {
             for (Tile item : row)
@@ -53,7 +63,8 @@ public class ViewBoard {
                     if (samePosPac(pacman,item))
                     {
                         try {
-                            writer.write("S" + " ");
+                            writer.write("S");
+                            System.out.print(("S"));
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -61,7 +72,8 @@ public class ViewBoard {
                     else if (samePosGhost(ghosts,item))
                     {
                         try {
-                            writer.write("G" + " ");
+                            writer.write("G");
+                            System.out.print("G");
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -69,7 +81,8 @@ public class ViewBoard {
                     else if (((Path) item).keyObject)
                     {
                         try {
-                            writer.write("K" + " ");
+                            writer.write("K");
+                            System.out.print("K");
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -77,7 +90,8 @@ public class ViewBoard {
                     else
                     {
                         try {
-                            writer.write("." + " ");
+                            writer.write(".");
+                            System.out.print(".");
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -86,7 +100,8 @@ public class ViewBoard {
                 else if (item instanceof Wall)
                 {
                     try {
-                        writer.write("X" + " ");
+                        writer.write("X");
+                        System.out.print("X");
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -94,17 +109,15 @@ public class ViewBoard {
             }
             try {
                 writer.write('\n');
+                System.out.print('\n');
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
         try {
-            writer.write("COLS "+ map.numCols());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            writer.write("ROWS "+ map.numRows() + "\n");
+
+            writer.write("-\n");
+            System.out.print('\n');
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

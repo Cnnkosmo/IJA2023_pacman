@@ -10,6 +10,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -23,7 +26,7 @@ public class PacmanApplication extends Application {
             public void handle(KeyEvent keyEvent) {
                 switch (keyEvent.getCode()){
                     case L:
-                        showGui(stage);
+                        showRewatch(stage);
                         break;
                     case G:
                         showGame(stage);
@@ -36,22 +39,51 @@ public class PacmanApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-    public void showGui(Stage stage) {
-        LoadGUI load = new LoadGUI(this);
-        Scene scene = new Scene(load.getRoot());
+    public void showRewatch(Stage stage) {
+        final JFrame frame = new JFrame("Open File Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFileChooser fc = new JFileChooser();
+        File file = null;
+        if (fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+            file = fc.getSelectedFile();
+        }
+        RewatchUi rewatchUi = new RewatchUi(this, file);
+        Scene scene = new Scene(rewatchUi.getRoot(rewatchUi.maps.get(0)));
+        RewatchContoller rewatchContoller = new RewatchContoller(rewatchUi);
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent)
+            {
+                switch (keyEvent.getCode())
+                {
+                    case Q:
+                        rewatchContoller.renderPrevious();
+                        break;
+                    case E:
+                        rewatchContoller.renderNext();
+                        break;
+                }
+            }
+        });
         stage.setScene(scene);
         stage.show();
     }
     public void showGame(Stage stage) {
-        GameScene gameScene = new GameScene(this);
-        Scene scene = new Scene(gameScene.rerender());
+        final JFrame frame = new JFrame("Open File Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFileChooser fc = new JFileChooser();
+        File file = null;
+        if (fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+            file = fc.getSelectedFile();
+        }
+        boolean record = false;
+        GameScene gameScene = new GameScene(this, file);
+        Scene scene = new Scene(gameScene.rerender(gameScene.map));
         PacmanAppController appController = new PacmanAppController(gameScene);
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                switch (keyEvent.getCode())
-                {
+                switch (keyEvent.getCode()) {
                     case W:
                         appController.moveUp();
                         System.out.println("W");
@@ -68,6 +100,11 @@ public class PacmanApplication extends Application {
                         appController.moveLeft();
                         System.out.println("A");
                         break;
+                    case R:
+                        appController.gameIsLoggedNow(true);
+                        break;
+                    case P:
+                        appController.gameIsLoggedNow(false);
                 }
 
             }

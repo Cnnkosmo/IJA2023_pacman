@@ -1,6 +1,7 @@
 module com.pacman_game.pacman_game {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.pacman_game.pacman to javafx.fxml;

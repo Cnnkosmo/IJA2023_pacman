@@ -4,6 +4,7 @@ import com.pacman_game.common.Tile;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -13,10 +14,10 @@ import java.util.ArrayList;
 public class Game{
     Maze_cfg cfg;
     MazeMap map;
-    public Game(){
+    public Game(File file){
         cfg = new Maze_cfg();
-        cfg.startReading(cfg.getRowsOrCols(0), cfg.getRowsOrCols(1));
-        cfg.getMapFromTxt();
+        cfg.startReading(cfg.getRowsOrCols(0, file), cfg.getRowsOrCols(1, file));
+        cfg.getMapFromTxt(file);
         cfg.stopReading();
         map = cfg.createMaze();
     }

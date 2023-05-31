@@ -11,6 +11,8 @@ import javafx.scene.layout.RowConstraints;
 import com.pacman_game.game.*;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.scene.Scene;
 
@@ -28,29 +30,47 @@ public class GameScene
     ViewBoard view;
 
     GridPane maze;
+    GameLogger logger;
 
-    public GameScene (PacmanApplication app)
+    boolean isLogged;
+
+    public void setLogged(boolean logged) {
+        isLogged = logged;
+    }
+
+    public boolean isLogged() {
+        return isLogged;
+    }
+
+    public GameScene (PacmanApplication app, File file)
     {
         this.app = app;
-        Game game = new Game();
+        Game game = new Game(file);
         this.map = game.getMap();
         this.pacman = game.createPacman(game.getMap());
         this.ghosts = game.createGhosts(game.getMap());
         this.pacmanController = new PacmanController(pacman, game.getMap());
         this.ghostControllers = game.setGhostControllers(ghosts, game.getMap());
+        this.logger = new GameLogger(pacman,ghosts,map);
         this.view = new ViewBoard(pacman,ghosts,map);
         this.maze = new GridPane();
+
         maze.setGridLinesVisible(true);
         log = new File("log.txt");
+        logger.logColsRows(pacman,ghosts,map);
     }
 
 
-    public GridPane rerender()
+    public GridPane rerender(MazeMap map)
     {
         if (map.isEnd())
         {
+            logger.createLogTxt();
             System.out.println("YOU'VE WIN :)");
-            exit();
+            if (logger.logAllGame(pacman,ghosts))
+            {
+                exit();
+            }
         }
         maze.getChildren().clear();
         for (int i = 0; i < map.map.length - 2; i++) {

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class PacmanAppController{
-
     GameScene scene;
     public PacmanAppController(GameScene scene)
     {
@@ -22,25 +21,46 @@ public class PacmanAppController{
     public void moveUp() {
         scene.pacmanController.update(Tile.Direction.U);
         moveGhosts(scene.ghostControllers);
-        scene.rerender();
+        scene.rerender(scene.map);
+//        scene.view.render(scene.pacman,scene.ghosts,scene.map);
+        if (scene.isLogged())
+        {
+            scene.logger.log(scene.pacman,scene.ghosts,scene.map);
+        }
     }
 
     public void moveDown() {
         scene.pacmanController.update(Tile.Direction.D);
         moveGhosts(scene.ghostControllers);
-        scene.rerender();
+        scene.rerender(scene.map);
+        if (scene.isLogged())
+        {
+            scene.logger.log(scene.pacman,scene.ghosts,scene.map);
+        }
     }
 
     public void moveLeft() {
         scene.pacmanController.update(Tile.Direction.L);
         moveGhosts(scene.ghostControllers);
-        scene.rerender();
+        scene.rerender(scene.map);
+        if (scene.isLogged())
+        {
+            scene.logger.log(scene.pacman,scene.ghosts,scene.map);
+        }
     }
 
     public void moveRight() {
         scene.pacmanController.update(Tile.Direction.R);
         moveGhosts(scene.ghostControllers);
-        scene.rerender();
+        scene.rerender(scene.map);
+        if (scene.isLogged())
+        {
+            scene.logger.log(scene.pacman,scene.ghosts,scene.map);
+        }
+    }
+    public void gameIsLoggedNow(boolean isItLogged)
+    {
+        scene.setLogged(isItLogged);
     }
 
     public void moveGhosts(ArrayList<GhostController> ghostControllers) {

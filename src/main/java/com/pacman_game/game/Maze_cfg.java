@@ -1,8 +1,7 @@
 package com.pacman_game.game;
 
-
-import com.pacman_game.common.Maze;
-import com.pacman_game.common.Tile;
+import java.awt.Desktop;
+import java.io.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -31,13 +30,26 @@ public class Maze_cfg {
             return false;
         }
     }
-    public int getRowsOrCols(int what){ // what is either 0 or 1 ( 0 for Rows from mao.txt, 1 for cols from map.txt)
+    public boolean processLineWithNoWalls(String line) {
+        if (this.maze == null)
+            return false;
+
+        if (this.maze.insertLine(line)) {
+            return true;
+        }
+        else {
+//            this.maze = null;
+            return false;
+        }
+    }
+    public int getRowsOrCols(int what, File file){ // what is either 0 or 1 ( 0 for Rows from mao.txt, 1 for cols from map.txt)
         if(what != 0 && what != 1){
             System.out.println("ERROR, BAD ATTEMPT TO USE FUNCTION getRowsOrCols!");
         }
         int number = 0;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("../pacman/maps/map_1.txt"));
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
             String firstLine = reader.readLine();
             String[] numbers = firstLine.split("\\s+");;
             number = Integer.parseInt(numbers[what]);
@@ -49,11 +61,13 @@ public class Maze_cfg {
         }
         return number;
     }
-    public void getMapFromTxt(){
+    public void getMapFromTxt(File file)
+    {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("../pacman_game/maps/map_2.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(file));
             String line = reader.readLine();
-            while ((line = reader.readLine()) != null) { // read each subsequent line
+            while ((line = reader.readLine()) != null)
+            { // read each subsequent line
                  processLine(line);
             }
         } catch(IOException e){
@@ -71,5 +85,11 @@ public class Maze_cfg {
         }
 
         return this.maze.createWall();
+    }
+    public boolean stopReadingWithNoWalls() {
+        if (this.maze == null) {
+            return false;
+        }
+        return true;
     }
 }

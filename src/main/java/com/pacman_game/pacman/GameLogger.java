@@ -15,9 +15,17 @@ public class GameLogger
     {
         this.viewBoard = new ViewBoard(pacman, ghosts, map);
     }
-    public void log(MazeMap map)
+    public boolean log(Pacman pacman, ArrayList<Ghost> ghosts, MazeMap map)
     {
         log.add(map);
+        viewBoard.render(pacman,ghosts,map,false);
+        return true;
+    }
+    public boolean logColsRows(Pacman pacman, ArrayList<Ghost> ghosts, MazeMap map)
+    {
+        log.add(map);
+        viewBoard.render(pacman,ghosts,map,true);
+        return true;
     }
     public void createLogTxt()
     {
@@ -40,11 +48,8 @@ public class GameLogger
         }
     }
 
-    public void logAllGame(Pacman pacman, ArrayList<Ghost> ghosts)
+    public boolean logAllGame(Pacman pacman, ArrayList<Ghost> ghosts)
     {
-        for (MazeMap map : log)
-        {
-            viewBoard.render(pacman, ghosts, map);
-        }
+        return true;
     }
 }
