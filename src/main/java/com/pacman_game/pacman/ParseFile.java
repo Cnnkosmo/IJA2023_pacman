@@ -26,15 +26,22 @@ public class ParseFile
         ArrayList<MazeMap> maps = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line = reader.readLine();
+            String line;
             cfg = new Maze_cfg();
             cfg.startReading(cols, rows);
             while ((line = reader.readLine()) != null)
             { // read each subsequent line
                 if (cfg.processLineWithNoWalls(line) == false)
                 {
-                    cfg.stopReadingWithNoWalls();
-                    maps.add(cfg.createMaze());
+                    if (line.length() == rows+2)
+                    {
+                        cfg.processLineWithNoWalls(line);
+                        cfg.stopReadingWithNoWalls();
+                        maps.add(cfg.createMaze());
+                        cfg.maze.setLastRow(0);
+                        cfg.resetMaze();
+                        cfg.startReading(cols, rows);
+                    }
                 }
             }
         } catch(IOException e){

@@ -19,6 +19,10 @@ public class MazeMap implements Maze {
         return this.insertLine("X".repeat(this.cols));
     }
 
+    public void setLastRow(int lastRow) {
+        this.lastRow = lastRow;
+    }
+
     public boolean insertLine(String line) {
         if (line.length() != this.cols)
             return false;

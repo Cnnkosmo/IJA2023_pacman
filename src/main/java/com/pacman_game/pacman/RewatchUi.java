@@ -63,7 +63,7 @@ public class RewatchUi {
                         maze.add(view, item.getColumn(), item.getRow());
 
                     } else if (((Path) item).isStartGhost()) {
-                        System.out.print("S");
+                        System.out.print("G");
                         Image image = new Image("file:../pacman_game/data/ghost.png");
                         ImageView view = new ImageView(image);
                         view.setFitHeight(40);
@@ -71,14 +71,14 @@ public class RewatchUi {
                         maze.add(view, item.getColumn(), item.getRow());
 
                     } else if (item.isFinish()) {
-                        System.out.print("S");
+                        System.out.print("T");
                         Image image = new Image("file:../pacman_game/data/key.png");
                         ImageView view = new ImageView(image);
                         view.setFitHeight(40);
                         view.setFitWidth(40);
                         maze.add(view, item.getColumn(), item.getRow());
                     } else if (item.isKeyObject()) {
-                        System.out.print("S");
+                        System.out.print("K");
                         Image image = new Image("file:../pacman_game/data/apple.png");
                         ImageView view = new ImageView(image);
                         view.setFitHeight(40);

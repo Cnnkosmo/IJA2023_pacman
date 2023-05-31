@@ -92,4 +92,8 @@ public class Maze_cfg {
         }
         return true;
     }
+    public void resetMaze()
+    {
+        this.maze = null;
+    }
 }
